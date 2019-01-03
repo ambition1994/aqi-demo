@@ -1,4 +1,3 @@
-// component
 Vue.component('card-component', {
   template: '#cardComponentTemplate',
   props: {
@@ -31,7 +30,6 @@ Vue.component('card-component', {
   }
 })
 
-// Vue
 new Vue({
   el: '#app',
   data: {
@@ -43,8 +41,9 @@ new Vue({
   methods: {
     get_data() {
       const vm = this
+      const cors = 'https://cors-anywhere.herokuapp.com/'
       const api = 'http://opendata2.epa.gov.tw/AQI.json'
-      axios.get(api).then(res => {
+      axios.get(cors+api).then(res => {
         vm.data = res.data
         vm.update.splice(0, vm.update.length)
         res.data.forEach(item => {
@@ -55,17 +54,6 @@ new Vue({
           })
         })
       })
-      // $.get(api).then(res => {
-      //   vm.data = res
-      //   vm.update.splice(0, vm.update.length)
-      //   res.forEach(item => {
-      //     vm.like_data.forEach(i => {
-      //       if(item.SiteName === i) {
-      //         vm.update.push(item)
-      //       }
-      //     })
-      //   })
-      // })
     },
     add_like(target) {
       const vm = this
