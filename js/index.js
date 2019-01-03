@@ -36,13 +36,15 @@ new Vue({
       data: [],
       selected: '',
       like_data: JSON.parse(localStorage.getItem('data')) || [],
-      update: []
+      update: [],
+      loading: false
   },
   methods: {
     get_data() {
       const vm = this
       const cors = 'https://cors-anywhere.herokuapp.com/'
       const api = 'http://opendata2.epa.gov.tw/AQI.json'
+      vm.loading = true
       axios.get(cors+api).then(res => {
         vm.data = res.data
         vm.update.splice(0, vm.update.length)
@@ -53,6 +55,7 @@ new Vue({
             }
           })
         })
+        vm.loading = false
       })
     },
     add_like(target) {
@@ -62,8 +65,10 @@ new Vue({
         vm.like_data.push(target.SiteName)
       }
       localStorage.setItem('data', JSON.stringify(vm.like_data))
-      vm.update.push(target)
-      // vm.get_data()
+      let search_repeat_two = vm.update.indexOf(target)
+      if(search_repeat_two === -1) {
+        vm.update.push(target)
+      }
     },
     del_like(target) {
       const vm = this
@@ -78,7 +83,6 @@ new Vue({
           vm.update.splice(index, 1)
         }
       })
-      // vm.get_data()
     },
     redload() {
       const vm = this

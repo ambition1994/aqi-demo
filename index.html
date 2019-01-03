@@ -13,35 +13,45 @@
     <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
   </head>
   <body>
-    <div id="app" class="container text-center mt-5">
-      <h1 class="text-white">各縣市空氣品質查詢</h1>
-      <div class="row">
-        <div class="col-12">
-          <select class="form-control w-25 my-5 mx-auto d-inline-block" v-model="selected">
-            <option :value="''">請選擇</option>
-            <option v-for="item in filter_county" :value="item">
-              {{ item }}
-            </option>
-          </select>
-          <div class="btn btn-outline-warning mb-2 ml-3" @click.prevent="redload">重新整理</div>
+
+    <div id="app" class="container text-center pt-5">
+
+      <div class="d-flex justify-content-center align-items-center text-white h-100"
+        v-if="loading">
+        <p class="h4">Loading ...</p>
+      </div>
+
+      <div class="pb-3" v-else>
+        <h1 class="text-white">各縣市空氣品質查詢</h1>
+        <div class="row">
+          <div class="col-12">
+            <select class="form-control w-25 my-5 mx-auto d-inline-block" v-model="selected">
+              <option :value="''">請選擇</option>
+              <option v-for="item in filter_county" :value="item">
+                {{ item }}
+              </option>
+            </select>
+            <div class="btn btn-outline-warning mb-2 ml-3" @click.prevent="redload">重新整理</div>
+          </div>
+        </div>
+        <h2 class="mb-4 text-left text-white">我的關注</h2>
+        <div class="row">
+          <card-component v-for="(item, index) in update" :star-icon="true" 
+            @unlike="del_like(item)" :details="item" :key="index">
+          </card-component>
+        </div>
+        <div class="hr"></div>
+        <div class="row">
+          <card-component v-for="(item, index) in data" v-if="selected === ''"
+            @like="add_like(item)" :details="item" :key="index">
+          </card-component>
+          <card-component v-for="(item, index) in filter_data" v-else-if
+            @like="add_like(item)" :details="item" :key="index">
+          </card-component>
         </div>
       </div>
-      <h2 class="mb-4 text-left text-white">我的關注</h2>
-      <div class="row">
-        <card-component v-for="(item, index) in update" :star-icon="true" 
-          @unlike="del_like(item)" :details="item" :key="index">
-        </card-component>
-      </div>
-      <div class="hr"></div>
-      <div class="row">
-        <card-component v-for="(item, index) in data" v-if="selected === ''"
-          @like="add_like(item)" :details="item" :key="index">
-        </card-component>
-        <card-component v-for="(item, index) in filter_data" v-else-if
-          @like="add_like(item)" :details="item" :key="index">
-        </card-component>
-      </div>
     </div>
+
     <!-- template -->
     <script type="text/x-template" id="cardComponentTemplate">
       <div class="col-6 col-md-3 mb-5 card-hover">

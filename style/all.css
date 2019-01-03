@@ -1,8 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
-body {
+
+html, body {
+  height: 100%;
   font-weight: 500;
   font-family: 'Noto Sans TC', sans-serif;
   background-color: #2E3F70;
+}
+
+#app {
+  height: 100%;
 }
 
 h1, h2 {
@@ -10,13 +16,13 @@ h1, h2 {
 }
 
 .card {
-  background-color: #999;
+  background-color: #ccc;
   -webkit-box-shadow: .5rem .5rem .5rem #000;
           box-shadow: .5rem .5rem .5rem #000;
 }
 
 .hr {
-  border-bottom: .25rem solid #999;
+  border-bottom: .25rem solid #ccc;
   margin-bottom: 3rem;
 }
 
