@@ -41,9 +41,8 @@ new Vue({
   methods: {
     get_data() {
       const vm = this
-      const cors = 'https://cors-anywhere.herokuapp.com/'
-      const api = 'http://opendata2.epa.gov.tw/AQI.json'
-      axios.get(cors+api).then(res => {
+      const api = 'https://cors-anywhere.herokuapp.com/http://opendata2.epa.gov.tw/AQI.json'
+      axios.get(api).then(res => {
         vm.data = res.data
         vm.update.splice(0, vm.update.length)
         res.data.forEach(item => {
