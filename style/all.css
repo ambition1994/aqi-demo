@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC");
+body {
+  font-weight: 500;
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: #2E3F70;
+}
+
+h1, h2 {
+  text-shadow: 5px 5px 5px #000;
+}
+
+.card {
+  background-color: #999;
+  -webkit-box-shadow: .5rem .5rem .5rem #000;
+          box-shadow: .5rem .5rem .5rem #000;
+}
+
+.hr {
+  border-bottom: .25rem solid #999;
+  margin-bottom: 3rem;
+}
+
+.aqi-1 {
+  background-color: #00E800;
+}
+
+.aqi-2 {
+  background-color: #ffff00;
+}
+
+.aqi-3 {
+  background-color: #ff7e00;
+}
+
+.aqi-4 {
+  background-color: #ff0000;
+}
+
+.aqi-5 {
+  background-color: #8f3f97;
+}
+
+.aqi-6 {
+  background-color: #7e0023;
+}
+/*# sourceMappingURL=all.css.map */
