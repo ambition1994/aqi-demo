@@ -41,9 +41,9 @@ new Vue({
   methods: {
     get_data() {
       const vm = this
-      const cors = 'https://cors-anywhere.herokuapp.com/'
+      // const cors = 'https://cors-anywhere.herokuapp.com/'
       const api = 'http://opendata2.epa.gov.tw/AQI.json'
-      axios.get(cors+api).then(res => {
+      axios.get(api).then(res => {
         vm.data = res.data
         vm.update.splice(0, vm.update.length)
         res.data.forEach(item => {
@@ -62,7 +62,8 @@ new Vue({
         vm.like_data.push(target.SiteName)
       }
       localStorage.setItem('data', JSON.stringify(vm.like_data))
-      vm.get_data()
+      vm.update.push(target)
+      // vm.get_data()
     },
     del_like(target) {
       const vm = this
@@ -72,7 +73,12 @@ new Vue({
         }
       })
       localStorage.setItem('data', JSON.stringify(vm.like_data))
-      vm.get_data()
+      vm.update.forEach((item, index) => {
+        if(item === target){
+          vm.update.splice(index, 1)
+        }
+      })
+      // vm.get_data()
     },
     redload() {
       const vm = this
